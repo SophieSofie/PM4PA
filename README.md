@@ -25,6 +25,8 @@ Interaction is supported through a **Streamlit** web interface and through **com
 
 ![Document upload](images/Document%20upload.png)
 
+![Document upload](images/Document%20upload.png)
+
 **Process modeling view.** After the documents are uploaded, the user inserts a query about the process which should be modelled based on the uploaded documents. The user can also select, if open source or closed source models should be used for generation.
 
 ![Process modeler](images/Process%20modeller.png)
