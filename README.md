@@ -99,42 +99,6 @@ Application code is packaged under **`src/`**:
 
 **Runtime artifacts** (commonly gitignored): vector store at `CHROMA_DB_PATH` (default `./chroma_db`), evaluation outputs under `eval_output/`, optional local corpora (e.g. `data/`).
 
-## Installation and usage
-
-Create a virtual environment and install dependencies:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env
-```
-**1. Edit .env** (endpoints, keys, CHROMA_DB_PATH, etc.)
-
-**2. Ingest documents** (after configuring paths/collection as needed):
-
-```bash
-python -m src.app.ingestion
-python -m src.app.ingestion --skip-existing   # skip already embedded files
-```
-**3. Run the system**
-**Option 1: Web interface** — theme: `src/web/.streamlit/config.toml`. From `src/web` so Streamlit resolves config:
-
-```bash
-cd src/web
-streamlit run streamlit_app.py
-```
-
-Then open **http://localhost:8501** (default). Browser uploads are ephemeral unless your deployment persists them; the durable index lives under `CHROMA_DB_PATH`.
-
-**Option 2: Single CLI run** (default graph matches the main web flow unless `--setting` overrides):
-
-```bash
-python -m src.app.run_request --query "The process to be modelled"
-```
-
-**Information about the evaluation of this project:** final evaluation metrics & instructions on how to run the evaluation pipeline [src/eval/evaluation.md](src/eval/evaluation.md).
-
 ## Docker
 
 Compose injects `.env` and persists Chroma under a named volume (`chroma_data` → `/data/chroma`); see `docker-compose.yml`. The image is listed in `.dockerignore` so secrets are not copied into layers. Remote services referenced in `.env` must be reachable **from inside the container**.
@@ -160,6 +124,45 @@ docker run --rm -p 8501:8501 --env-file .env \
   -e CHROMA_DB_PATH=/data/chroma \
   agentic-rag
 ```
+
+
+## Installation and usage
+
+Create a virtual environment and install dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+**1. Edit .env** (endpoints, keys, CHROMA_DB_PATH, etc.)
+
+**2. Run the system**
+**Option 1: Web interface** — theme: `src/web/.streamlit/config.toml`. From `src/web` so Streamlit resolves config:
+
+```bash
+cd src/web
+streamlit run streamlit_app.py
+```
+
+Then open **http://localhost:8501** (default). Browser uploads are ephemeral unless your deployment persists them; the durable index lives under `CHROMA_DB_PATH`.
+
+**Option 2: Single CLI run** (default graph matches the main web flow unless `--setting` overrides):
+**1. Ingest documents** (after configuring paths/collection as needed):
+
+```bash
+python -m src.app.ingestion
+python -m src.app.ingestion --skip-existing   # skip already embedded files
+```
+**2. Run BPMN Generation**
+
+```bash
+python -m src.app.run_request --query "The process to be modelled"
+```
+
+**Information about the evaluation of this project:** final evaluation metrics & instructions on how to run the evaluation pipeline [src/eval/evaluation.md](src/eval/evaluation.md).
+
 
 ## License
 
