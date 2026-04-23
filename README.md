@@ -23,9 +23,7 @@ Interaction is supported through a **Streamlit** web interface and through **com
 
 **Document ingestion.** Users can upload or select source documents (PDF, Word, text, etc.); the app ingests them into the configured Chroma collection so retrieval is grounded in the corpus.
 
-![Document upload](images/Document%20upload.png)
-
-![Document upload](images/Document%20upload.png)
+![Process modeler](images/Process%20modeller.png)
 
 **Process modeling view.** After the documents are uploaded, the user inserts a query about the process which should be modelled based on the uploaded documents. The user can also select, if open source or closed source models should be used for generation.
 
