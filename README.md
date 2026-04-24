@@ -1,9 +1,9 @@
-# Agentic RAG System
+# Process Modeling for Public Administration (PM4PA) via Agentic RAG
 
 ## Overview
 
 
-This repository implements an **agentic retrieval-augmented generation (RAG) pipeline** that supports **document-grounded BPMN 2.0 process modeling**. Given heterogeneous text sources (e.g. regulations, handbooks, PDF or Office documents), the system **retrieves** relevant passages, **drafts** a process description, **generates** a nested BPMN JSON representation, and **validates** (and optionally **revises**) the model against the query and sources. The design targets **public administration** knowledge bases but is applicable wherever processes must be modelled from different sources.
+PM4PA implements an **agentic retrieval-augmented generation (RAG) pipeline** that supports **document-grounded BPMN 2.0 process modeling**. Given heterogeneous text sources (e.g. regulations, handbooks, PDF or Office documents), the system **retrieves** relevant passages, **drafts** a process description, **generates** a nested BPMN JSON representation, and **validates** (and optionally **revises**) the model against the query and sources. The design targets **public administration** knowledge bases but is applicable wherever processes must be modelled from different sources.
 
 **Source annotation** on generated process elements (e.g. links to documents, pages, or retrieved chunks in model metadata) **increases transparency and explainability**, so user can trace model content back to the underlying corpus.
 
@@ -70,6 +70,10 @@ End-to-end behavior, summarized:
 3. **Drafting** — An intermediate **process draft** is produced from retrieved context.
 4. **BPMN generation** — Structured **nested BPMN JSON** is generated and is automatically submitted to an external service for XML layout.
 5. **Validation and revision** — Configurable validators compare the model to sources and the query; the graph may loop for **revision** within iteration limits.
+
+## BPMN conversion
+
+The **external BPMN layout / conversion** step (client code in `src/bpmn_service/`) implements an approach from Köpke & Safan, [*Efficient LLM-Based Conversational Process Modeling*](https://link.springer.com/chapter/10.1007/978-3-031-78666-2_20) (BPM 2024 Workshops, LNBIP 534; DOI: [10.1007/978-3-031-78666-2_20](https://doi.org/10.1007/978-3-031-78666-2_20)). It is **not** part of drafting or nested JSON generation: it is invoked **only** to produce the **final** BPMN XML (layout and serialization) from the structured model the pipeline has already built.
 
 ## Repository structure
 
