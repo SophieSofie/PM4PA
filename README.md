@@ -1,4 +1,4 @@
-# Process Modeling for Public Administration (PM4PA) via Agentic RAG
+# Process Modeling for Public Administration (PM4PA)
 
 ## Overview
 
