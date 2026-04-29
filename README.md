@@ -5,7 +5,7 @@
 
 PM4PA implements an **agentic retrieval-augmented generation (RAG) pipeline** that supports **document-grounded BPMN 2.0 process modeling**. Given heterogeneous text sources (e.g. regulations, handbooks, PDF or Office documents), the system **retrieves** relevant passages, **drafts** a process description, **generates** a nested BPMN JSON representation, and **validates** (and optionally **revises**) the model against the query and sources. The design targets **public administration** knowledge bases but is applicable wherever processes must be modelled from different sources.
 
-**Source annotation** on generated process elements (e.g. links to documents, pages, or retrieved chunks in model metadata) **increases transparency and explainability**, so user can trace model content back to the underlying corpus.
+**Source annotation** on generated process elements (e.g. links to documents, pages, or retrieved chunks in model metadata) **increases transparency and explainability**, so users can trace model content back to the underlying source document.
 
 Interaction is supported through a **Streamlit** web interface and through **command-line** entrypoints for single runs and for **quantitative evaluation** against gold BPMN artifacts (see [src/eval/evaluation.md](src/eval/evaluation.md)). The Streamlit app can be run **in Docker** for a reproducible environment; see [Docker](#docker).
 
